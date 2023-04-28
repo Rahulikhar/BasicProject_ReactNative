@@ -53,7 +53,7 @@ export default function Home(props) {
             <View style={styles.HeaderContainer}>
                 <View style={styles.userContainer}>
                     <FontAwesome5 name="user-circle" size={30} color="#000" />
-                    <Text style={styles.userTXT}>{Name.Name || ""}</Text>
+                    <Text style={styles.userTXT}>{Name?.Name || ""}</Text>
                 </View>
                 <FontAwesome5 name="bell" size={30} color="#000" />
             </View>
