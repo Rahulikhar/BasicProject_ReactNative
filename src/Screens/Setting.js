@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StoreData } from '../Context/ManageData';
 
 
 
 export default function Setting(props) {
+    const EditData = useContext(StoreData)
     const [Name, setName] = useState({})
     const getName = async () => {
         const value = await AsyncStorage.getItem("LoginCredientional")
@@ -32,7 +34,14 @@ export default function Setting(props) {
                 <Text style={style.txt}>About Us</Text>
                 <Text style={style.txt}>Terms And Conditions</Text>
                 <Text style={style.txt}>Privacy Policy</Text>
-                <Text style={style.txt}>Refern And Earn</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        EditData.setfirst("Ikhar")
+                    }}
+                >
+                    <Text style={style.txt}>Refern And Earn</Text>
+
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => {
                     props.navigation.replace("Login")
                 }}>

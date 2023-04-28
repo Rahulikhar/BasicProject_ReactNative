@@ -9,6 +9,7 @@ export default function Splash(props) {
   }, [])
 
   return (
+
     <View style={style.mainContainer}>
       <Image source={require('../Assets/Images/Logo.png')}
         style={style.logo}

@@ -1,11 +1,17 @@
 import { View, Text, StyleSheet, TextInput, Dimensions, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 const { height, width } = Dimensions.get('window')
 import AntDesign from "react-native-vector-icons/AntDesign"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from 'react-native-flash-message';
+import axios from 'react-native-axios'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Login(props) {
+
+    const user = useSelector(state=>state.eventsReducer)
+    const Dispatch = useDispatch()
+
     const [Mobile, setMobile] = useState('')
     const [MobileError, setMobileError] = useState('')
     const [Password, setPassword] = useState("")
@@ -72,6 +78,28 @@ export default function Login(props) {
         } else {
             validatePassword(Password)
         }
+    }
+
+    useEffect(() => {
+        coinList()
+    }, [])
+
+
+    const coinList = () => {
+        axios({
+            method: 'GET',
+            url: 'https://dummy.restapiexample.com/api/v1/employees',
+
+
+        }).then(res => {
+            console.log(res.data.data, "response conslist API")
+            Dispatch({
+                type: 'SAVE_COINSLIST_API',
+                payload: res.data.data
+            })
+        }).catch(err => {
+            console.log(err, "error coinlist API")
+        })
     }
 
     return (

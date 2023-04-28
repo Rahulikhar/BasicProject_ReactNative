@@ -1,11 +1,23 @@
 import { View, Text, StyleSheet, FlatList, Image, Dimensions } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 const { height, width } = Dimensions.get('window')
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StoreData } from '../Context/ManageData';
+import { useSelector, useDispatch } from 'react-redux';
+import store from '../Redux/Store';
 
 
 export default function Home(props) {
+
+    const EditData = useContext(StoreData)
+
+    const Dispatch = useDispatch()
+    const user = useSelector(state => state.eventsReducer)
+
+    console.log(user?.CoinsListAPI[0]?.employee_age, "klllklklkllk")
+
+
     const data = [
         { img: require("../Assets/Images/img1.jpeg") },
         { img: require("../Assets/Images/img2.jpeg") },
@@ -30,6 +42,9 @@ export default function Home(props) {
 
     useEffect(() => {
         getName()
+        setTimeout(() => {
+            console.log(EditData.first, "llllllll")
+        }, 500);
     }, [])
 
 
